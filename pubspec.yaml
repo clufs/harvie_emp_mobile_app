@@ -1,0 +1,34 @@
+name: martes_emp_qr
+description: A new Flutter project.
+
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.4 <3.0.0"
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
+  http: ^0.13.5
+  logger: ^1.1.0
+  mobile_scanner: ^2.1.0
+  provider: ^6.0.4
+  lottie: ^2.1.0
+  flutter_secure_storage: ^6.0.0
+  string_validator: ^0.3.0
+  intl: ^0.17.0
+  auto_size_text: ^3.0.0
+  audioplayers: ^4.1.0
+  slide_to_act: ^2.0.1
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
