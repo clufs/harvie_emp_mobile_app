@@ -1,10 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
-import 'package:lottie/lottie.dart';
 import 'package:martes_emp_qr/provider/cart.provider.dart';
-import 'package:martes_emp_qr/provider/login.provider.dart';
+import 'package:martes_emp_qr/provider/products.provider.dart';
 import 'package:martes_emp_qr/screens/cart/widgets/Total.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +12,29 @@ class NewOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
+    final productsProvider = Provider.of<ProductsProvider>(context);
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        title: const Text(
+          'Actualizar Productos',
+          style: TextStyle(color: Colors.black),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                await productsProvider.getAllProducts();
+              },
+              icon: const Icon(
+                Icons.refresh,
+                color: Colors.black,
+              )),
+        ],
+      ),
       body: Container(
+          height: double.infinity,
           child: cartProvider.cart.isEmpty
               ? Center(
                   child: Column(

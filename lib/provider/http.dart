@@ -28,3 +28,19 @@ Future<Response> postWithToken(String path, data) async {
 
   return resp;
 }
+
+Future<Response> getWithToken(String path) async {
+  final token = await _storage.read(key: 'token');
+  final url = Uri.parse('$baseUrl/$path');
+  final headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer $token',
+  };
+
+  Response resp = await http.get(
+    url,
+    headers: headers,
+  );
+
+  return resp;
+}

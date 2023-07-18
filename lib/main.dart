@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:martes_emp_qr/provider/cart.provider.dart';
 import 'package:martes_emp_qr/provider/login.provider.dart';
+import 'package:martes_emp_qr/provider/products.provider.dart';
 import 'package:martes_emp_qr/provider/sales.dart';
 import 'package:martes_emp_qr/provider/ui.provider.dart';
 import 'package:martes_emp_qr/screens/cart/finishOrder.screen.dart';
@@ -26,6 +28,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UiProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => SalesProvider()),
+        ChangeNotifierProvider(create: (_) => ProductsProvider()),
       ],
       child: MaterialApp(
         title: 'Material App',
