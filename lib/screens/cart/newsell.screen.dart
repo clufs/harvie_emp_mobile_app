@@ -26,6 +26,8 @@ class NewOrderScreen extends StatelessWidget {
           IconButton(
               onPressed: () async {
                 await productsProvider.getAllProducts();
+                await productsProvider.getProductsFromDb();
+                Logger().wtf(productsProvider.products.length);
               },
               icon: const Icon(
                 Icons.refresh,

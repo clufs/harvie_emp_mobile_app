@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 import 'package:martes_emp_qr/provider/http.dart';
+import 'package:martes_emp_qr/provider/products.provider.dart';
 import 'package:martes_emp_qr/provider/ui.provider.dart';
 import 'package:martes_emp_qr/screens/cart/finishOrder.screen.dart';
 import 'package:martes_emp_qr/screens/cart/scan/widgets/modal.dart';
+import 'package:martes_emp_qr/src/models/products.dart';
 import 'package:provider/provider.dart';
 import '../src/models/cart.dart';
 
@@ -34,34 +36,29 @@ class CartProvider extends ChangeNotifier {
   bool isLoading = false;
 
   Future loadingProduct(int qrCode, context) async {
-    final uiProvider = Provider.of<UiProvider>(context, listen: false);
+    final productsProvider =
+        Provider.of<ProductsProvider>(context, listen: false);
     String data = json.encode({'id': qrCode});
 
     Logger().wtf(data);
 
     if (true) {
       isLoading = true;
-      Response resp = await postWithToken('api/employee/get-product', data);
-      Logger().w(resp.body);
+
+      //obtenemos el producto desde la base de datos local.
+      final products = await productsProvider.getProductsFromDb();
 
       try {
-        if (resp.statusCode == 201) {
-          final prod = json.decode(resp.body);
-          Logger().wtf(prod);
-
-          _showModal(context, prod);
-
-          // uiProvider.selectedMenuOpt = 0;
-          // Navigator.pushReplacementNamed(
-          //   context,
-          //   'navigation',
-          // );
-
-          isLoading = false;
-          notifyListeners();
-          return true;
-        }
+        Product productoEncontrado = products.firstWhere(
+          (element) => element.id == qrCode,
+        );
+        Logger().wtf(productoEncontrado);
+        _showModal(context, productoEncontrado);
+        isLoading = false;
+        notifyListeners();
+        return true;
       } catch (e) {
+        print('producto no encontrado');
         isLoading = false;
         notifyListeners();
         return false;

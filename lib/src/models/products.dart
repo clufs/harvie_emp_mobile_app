@@ -3,7 +3,7 @@ import 'dart:convert';
 class Product {
   int id;
   String title;
-  dynamic priceToSell;
+  int priceToSell;
 
   Product({required this.id, required this.title, required this.priceToSell});
 

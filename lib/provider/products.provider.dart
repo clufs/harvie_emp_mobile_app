@@ -12,6 +12,8 @@ class ProductsProvider extends ChangeNotifier {
 
     DatabaseHelper dbHelper = DatabaseHelper();
     await dbHelper.resetTable();
+    //!funcion para borrar la tabla y comenzar denuevo.
+    // await dbHelper.clearTable();
 
     for (Product product in products) {
       await dbHelper.insertProducto(product);

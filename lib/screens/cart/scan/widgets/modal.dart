@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:martes_emp_qr/provider/ui.provider.dart';
+import 'package:martes_emp_qr/src/models/products.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../provider/cart.provider.dart';
 import '../../../../src/models/cart.dart';
 
-mySheet(BuildContext context, dynamic product) {
+mySheet(BuildContext context, Product product) {
   TextEditingController cantController = TextEditingController();
   final cartProvider = Provider.of<CartProvider>(context, listen: false);
   final uiProvider = Provider.of<UiProvider>(context, listen: false);
@@ -30,7 +31,7 @@ mySheet(BuildContext context, dynamic product) {
                 child: Column(
                   children: [
                     Text(
-                      product['name'],
+                      product.title,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -38,7 +39,7 @@ mySheet(BuildContext context, dynamic product) {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 5),
-                    Text('\$${product['price']}',
+                    Text('\$${product.priceToSell}',
                         style: const TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center),
@@ -48,10 +49,10 @@ mySheet(BuildContext context, dynamic product) {
                           enableSuggestions: false,
                           onSubmitted: (value) => {
                                 cartProvider.addProduct(CartItem(
-                                    name: product['name'],
-                                    id: product['id'].toString(),
+                                    name: product.title,
+                                    id: product.id.toString(),
                                     cant: int.parse(cantController.text),
-                                    price: product['price'])),
+                                    price: product.priceToSell)),
                                 uiProvider.selectedMenuOpt = 0,
                                 Navigator.pushReplacementNamed(
                                   context,

@@ -29,7 +29,7 @@ class DatabaseHelper {
         CREATE TABLE productos(
           id INTEGER PRIMARY KEY,
           title TEXT,
-          priceToSell REAL
+          priceToSell INTEGER
         )
       ''');
 
@@ -57,7 +57,7 @@ class DatabaseHelper {
       CREATE TABLE productos(
         id INTEGER PRIMARY KEY,
         title TEXT,
-        priceToSell REAL
+        priceToSell INTEGER
       )
     ''');
   }
@@ -80,15 +80,17 @@ class DatabaseHelper {
     });
   }
 
+  // esta funcion es para borrar los datos de latabla
   Future<void> resetTable() async {
     Database? db = await database;
     await db?.delete('productos');
   }
 
-  // Future<void> resetTable() async {
-  //   Database? db = await database;
-  //   await db!.execute('DROP TABLE IF EXISTS productos');
-  //   await _onCreate(
-  //       db, 1); // Llama al método _onCreate para crear la tabla nuevamente
-  // }
+  //! esta funcion es para borrar la tabla entera
+  Future<void> clearTable() async {
+    Database? db = await database;
+    await db!.execute('DROP TABLE IF EXISTS productos');
+    await _onCreate(
+        db, 1); // Llama al método _onCreate para crear la tabla nuevamente
+  }
 }
