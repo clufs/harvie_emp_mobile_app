@@ -19,18 +19,18 @@ class NewOrderScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         title: const Text(
-          'Actualizar Productos',
+          'Obtener Productos',
           style: TextStyle(color: Colors.black),
         ),
         actions: [
           IconButton(
               onPressed: () async {
                 await productsProvider.getAllProducts();
-                await productsProvider.getProductsFromDb();
+                // await productsProvider.getProductsFromDb();
                 Logger().wtf(productsProvider.products.length);
               },
               icon: const Icon(
-                Icons.refresh,
+                Icons.download,
                 color: Colors.black,
               )),
         ],

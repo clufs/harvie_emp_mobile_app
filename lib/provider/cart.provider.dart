@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 import 'package:martes_emp_qr/provider/http.dart';
 import 'package:martes_emp_qr/provider/products.provider.dart';
-import 'package:martes_emp_qr/provider/ui.provider.dart';
 import 'package:martes_emp_qr/screens/cart/finishOrder.screen.dart';
 import 'package:martes_emp_qr/screens/cart/scan/widgets/modal.dart';
 import 'package:martes_emp_qr/src/models/products.dart';

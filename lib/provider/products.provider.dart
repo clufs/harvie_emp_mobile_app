@@ -10,8 +10,12 @@ class ProductsProvider extends ChangeNotifier {
     final productsFromDB = await getWithToken('api/employee/products');
     final products = parseItems(productsFromDB.body);
 
+    this.products = products;
+
     DatabaseHelper dbHelper = DatabaseHelper();
+
     await dbHelper.resetTable();
+
     //!funcion para borrar la tabla y comenzar denuevo.
     // await dbHelper.clearTable();
 
