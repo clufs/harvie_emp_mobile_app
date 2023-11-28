@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../provider/ui.provider.dart';
 import '../../widget/custom_nav_bar.dart';
 import '../home/home.screen.dart';
+import '../home/home_tablet.screen.dart';
 
 class Navigation extends StatelessWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -16,6 +17,12 @@ class Navigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiProvider = Provider.of<UiProvider>(context);
     final cartProvider = Provider.of<CartProvider>(context);
+
+    bool isTablet = MediaQuery.of(context).size.width > 1200 ? true : false;
+
+    if (isTablet) {
+      return const HomeTabletScreen();
+    }
 
     return Scaffold(
       body: const SafeArea(

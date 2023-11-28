@@ -12,6 +12,9 @@ class SalesProvider extends ChangeNotifier {
   final _storage = const FlutterSecureStorage();
 
   List sales = [];
+  // int totalCard = 0;
+  // int totalCash = 0;
+  // int totalTransf = 0;
 
   static String finalUrl = "$baseUrl/api/sales/get-sales-of-day-employee";
 
@@ -25,7 +28,9 @@ class SalesProvider extends ChangeNotifier {
     };
     Response resp = await http.get(url, headers: headers);
     Logger().wtf(json.decode(resp.body));
+
     sales = json.decode(resp.body);
+
     return sales;
   }
 

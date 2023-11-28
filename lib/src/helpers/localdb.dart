@@ -29,13 +29,14 @@ class DatabaseHelper {
         CREATE TABLE productos(
           id INTEGER PRIMARY KEY,
           title TEXT,
-          priceToSell INTEGER
+          priceToSell INTEGER,
+          category TEXT
         )
       ''');
 
       await db.execute('''
-        INSERT INTO productos (id, title, priceToSell)
-        SELECT id, title, priceToBuy FROM temp_productos
+        INSERT INTO productos (id, title, priceToSell, category)
+        SELECT id, title, priceToBuy, category FROM temp_productos
       ''');
 
       await db.execute('DROP TABLE temp_productos');
@@ -57,7 +58,8 @@ class DatabaseHelper {
       CREATE TABLE productos(
         id INTEGER PRIMARY KEY,
         title TEXT,
-        priceToSell INTEGER
+        priceToSell INTEGER,
+        category TEXT
       )
     ''');
   }

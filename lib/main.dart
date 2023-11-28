@@ -13,6 +13,7 @@ import 'package:martes_emp_qr/screens/login/widget/Scan_Widget.dart';
 import 'package:martes_emp_qr/screens/navigarion/loading.screen.dart';
 import 'package:martes_emp_qr/screens/navigarion/navigation.dart';
 import 'package:martes_emp_qr/screens/sells/order.screen.dart';
+import 'package:martes_emp_qr/screens/sells/summaryOfDay.screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
           '[new_Order]finish_new_order': (_) => const FinishScreen(),
           'navigation': (_) => const Navigation(),
           '[orders}order': (_) => const SellScreen(),
+          'summary_of_day': (_) => const SummaryOfDay(),
         },
         initialRoute: 'loading',
       ),

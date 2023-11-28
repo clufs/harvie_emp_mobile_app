@@ -30,6 +30,7 @@ class CartProvider extends ChangeNotifier {
   //-------------------------
 
   Method method = Method.efectivo;
+  CardType cardType = CardType.debit;
 
   bool isLoading = false;
 
@@ -105,11 +106,27 @@ class CartProvider extends ChangeNotifier {
   Future<bool> sendCart(context) async {
     isLoading = true;
     notifyListeners();
-    final data = {
-      'cart': cart,
-      'payment_method': method.name,
-    };
+
+    var data;
+
+    if (method == Method.efectivo || method == Method.deposito) {
+      data = {
+        'cart': cart,
+        'payment_method': method.name,
+      };
+    }
+
+    if (method == Method.tarjeta) {
+      data = {
+        'cart': cart,
+        'payment_method': method.name,
+        'cardType': cardType.name,
+      };
+    }
+
     final finalData = json.encode(data);
+    Logger().wtf(finalData);
+
     Response resp = await postWithToken('api/sales', finalData);
     Logger().wtf(resp.body);
     if (resp.statusCode == 201) {
@@ -126,6 +143,11 @@ class CartProvider extends ChangeNotifier {
 
   setMethod(Method method) {
     this.method = method;
+    notifyListeners();
+  }
+
+  setCardType(CardType cardType) {
+    this.cardType = cardType;
     notifyListeners();
   }
 }

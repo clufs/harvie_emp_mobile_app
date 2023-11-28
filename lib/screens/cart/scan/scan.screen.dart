@@ -70,8 +70,8 @@ class ScanProduct extends StatelessWidget {
                   if (barcode.rawValue == null) {
                     debugPrint('Error al scanear un codigo');
                   } else {
-                    final player = AudioPlayer();
-                    await player.play(AssetSource('beep.wav'));
+                    // final player = AudioPlayer();
+                    // await player.play(AssetSource('beep.wav'));
                     final String code = barcode.rawValue!;
                     cartProvider.loadingProduct(int.parse(code), context);
                     cartProvider.isCameraActive = false;

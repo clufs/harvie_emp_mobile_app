@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:martes_emp_qr/provider/http.dart';
 import 'package:martes_emp_qr/src/helpers/localdb.dart';
 import 'package:martes_emp_qr/src/models/products.dart';
@@ -9,6 +10,8 @@ class ProductsProvider extends ChangeNotifier {
   Future<void> getAllProducts() async {
     final productsFromDB = await getWithToken('api/employee/products');
     final products = parseItems(productsFromDB.body);
+
+    Logger().wtf(products.map((e) => e.category));
 
     this.products = products;
 
@@ -22,6 +25,8 @@ class ProductsProvider extends ChangeNotifier {
     for (Product product in products) {
       await dbHelper.insertProducto(product);
     }
+
+    notifyListeners();
 
     return;
   }

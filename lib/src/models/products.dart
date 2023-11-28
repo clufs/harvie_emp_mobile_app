@@ -4,14 +4,21 @@ class Product {
   int id;
   String title;
   int priceToSell;
+  String category;
 
-  Product({required this.id, required this.title, required this.priceToSell});
+  Product({
+    required this.id,
+    required this.title,
+    required this.priceToSell,
+    required this.category,
+  });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: json['id'],
       title: json['title'],
       priceToSell: json['priceToSell'],
+      category: json['category'],
     );
   }
 
@@ -20,6 +27,7 @@ class Product {
       'id': id,
       'title': title,
       'priceToSell': priceToSell,
+      'category': category,
     };
   }
 
@@ -28,6 +36,7 @@ class Product {
       id: map['id'],
       title: map['title'],
       priceToSell: map['priceToSell'],
+      category: map['category'],
     );
   }
 }

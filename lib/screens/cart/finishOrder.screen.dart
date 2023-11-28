@@ -7,6 +7,8 @@ import 'package:slide_to_act/slide_to_act.dart';
 
 enum Method { efectivo, deposito, tarjeta }
 
+enum CardType { credit, debit }
+
 class FinishScreen extends StatelessWidget {
   const FinishScreen({Key? key}) : super(key: key);
 
@@ -119,6 +121,58 @@ class NewWidget extends StatelessWidget {
                 textScaleFactor: 1,
               ),
             ],
+          ),
+          Container(
+            child: cartProvider.method == Method.tarjeta
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.amber.shade100,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Radio(
+                                  activeColor: Colors.blueGrey.shade500,
+                                  value: CardType.credit,
+                                  groupValue: cartProvider.cardType,
+                                  onChanged: (CardType? cardType) =>
+                                      cartProvider.setCardType(cardType!),
+                                ),
+                                AutoSizeText(
+                                  'Credito',
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                  textScaleFactor: 1,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Radio(
+                                  activeColor: Colors.blueGrey.shade500,
+                                  value: CardType.debit,
+                                  groupValue: cartProvider.cardType,
+                                  onChanged: (CardType? cardType) =>
+                                      cartProvider.setCardType(cardType!),
+                                ),
+                                AutoSizeText(
+                                  'Debito',
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                  textScaleFactor: 1,
+                                ),
+                              ],
+                            ),
+                          ]),
+                    ),
+                  )
+                : SizedBox(
+                    height: 95,
+                  ),
           )
         ],
       ),

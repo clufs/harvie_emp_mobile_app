@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:martes_emp_qr/screens/sells/summaryOfDay.screen.dart';
 import 'package:martes_emp_qr/src/constants/sizes.dart';
 import 'package:provider/provider.dart';
 import '../../provider/sales.dart';
@@ -14,18 +15,19 @@ class SellsScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-          padding: EdgeInsets.all(paddingSize),
-          child: FutureBuilder(
-            future: sellsProvider.getSalesOfToday(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return const LoadingWidget();
-              }
-              return Container(
-                child: snapshot.data!.isEmpty ? Text('Sin ordenes') : HasData(),
-              );
-            },
-          )),
+        padding: EdgeInsets.all(paddingSize),
+        child: FutureBuilder(
+          future: sellsProvider.getSalesOfToday(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const LoadingWidget();
+            }
+            return Container(
+              child: snapshot.data!.isEmpty ? Text('Sin ordenes') : HasData(),
+            );
+          },
+        ),
+      ),
     );
   }
 }
@@ -46,6 +48,7 @@ class HasData extends StatelessWidget {
           'Ventas del dia',
           style: Theme.of(context).textTheme.headline4,
         ),
+        // const SummaryOfDay(),
         Expanded(
           child: ListView.builder(
             itemCount: sellsProvider.sales.length,
