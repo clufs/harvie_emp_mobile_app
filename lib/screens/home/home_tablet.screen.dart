@@ -118,7 +118,6 @@ class SummaryWidget extends StatelessWidget {
                 ),
                 Container(
                   height: 200,
-                  color: Colors.amber,
                   child: TablaProd(),
                 ),
                 Container(),
@@ -384,6 +383,7 @@ class _ProductsContainerState extends State<ProductsContainer> {
 
   Widget buildProductContainer(product) {
     final cartProvider = Provider.of<CartProvider>(context);
+    final oCcy = NumberFormat.simpleCurrency();
 
     return InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(15.0)),
@@ -419,7 +419,7 @@ class _ProductsContainerState extends State<ProductsContainer> {
             Positioned(
               bottom: 20,
               child: Text(
-                '${product.priceToSell}',
+                oCcy.format(product.priceToSell),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 30,
